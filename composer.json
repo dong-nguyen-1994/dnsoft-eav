@@ -1,0 +1,27 @@
+{
+    "name": "dnsoft/eav",
+    "description": "This is module EAV",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Dong Nguyen",
+            "email": "dong.joseph2810@gmail.com"
+        }
+    ],
+    "require": {
+        "dnsoft/eav": "dev-master"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Dnsoft\\Eav\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dnsoft\\Eav\\EavServiceProvider"
+            ]
+        }
+    }
+}

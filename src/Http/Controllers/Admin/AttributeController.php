@@ -29,4 +29,12 @@ abstract class AttributeController extends Controller
             'routeNamePrefix' => $this->getNamePrefixRoute(),
         ]);
     }
+
+    public function create()
+    {
+        return view('eav::admin.attribute.create')->with([
+            'routeNamePrefix' => $this->getNamePrefixRoute(),
+            'item' => null
+        ]);
+    }
 }

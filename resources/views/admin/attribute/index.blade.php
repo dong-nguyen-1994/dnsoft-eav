@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="text-sm-right">
-                                    <a href="{{ route('catalog.admin.product.create') }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> New Product</a>
+                                    <a href="{{ route($routeNamePrefix.'create') }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> New Attribute</a>
                                 </div>
                             </div><!-- end col-->
                         </div>
@@ -46,7 +46,7 @@
                                     <th>#</th>
                                     <th>{{ __('eav::attribute.name') }}</th>
                                     <th>{{ __('eav::attribute.slug') }}</th>
-                                    <th>{{ __('eav::product.input_type') }}</th>
+                                    <th>{{ __('eav::attribute.input_type') }}</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -55,8 +55,6 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->slug }}</td>
-
-                                        <td>{{ $item->special_price }}</td>
                                         <td>{{ $item->input_type }}</td>
                                         <td>
                                             <div class="dropdown">

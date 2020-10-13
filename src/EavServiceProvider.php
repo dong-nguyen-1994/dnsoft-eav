@@ -14,6 +14,35 @@ use Module\Customer\Events\CustomerAdminMenuRegistered;
 
 class EavServiceProvider extends ServiceProvider
 {
+    const TEXT = 'text';
+    const BOOLEAN = 'boolean';
+    const INTEGER = 'integer';
+    const VARCHAR = 'varchar';
+    const DATETIME = 'datetime';
+    const IMAGE = 'image';
+
+    public static $mapInputType = [
+        'text'            => self::VARCHAR,
+        'textarea'        => self::TEXT,
+        'editor'          => self::TEXT,
+        'yes_no'          => self::BOOLEAN,
+        'multiple_select' => self::INTEGER,
+        'dropdown'        => self::INTEGER,
+        'image'           => self::IMAGE,
+        'gallery'         => self::IMAGE,
+    ];
+
+    public static $isCollection = [
+        'text'            => false,
+        'textarea'        => false,
+        'editor'          => false,
+        'yes_no'          => false,
+        'multiple_select' => true,
+        'dropdown'        => false,
+        'image'           => false,
+        'gallery'         => true,
+    ];
+
     public function register()
     {
         //$this->app->singleton('rinvex.attributes.attribute', Attribute::class);
@@ -34,6 +63,8 @@ class EavServiceProvider extends ServiceProvider
         ], 'dnsoft-admin');
 
         Blade::include('eav::form.attributes', 'attributes');
+
+        require_once __DIR__.'/../helpers/helpers.php';
 
 //        Attribute::typeMap([
 //            self::TEXT     => \Rinvex\Attributes\Models\Type\Text::class,

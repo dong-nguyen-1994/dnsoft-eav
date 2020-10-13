@@ -4,6 +4,7 @@ namespace Dnsoft\Eav\Repositories;
 
 use Dnsoft\Eav\Models\Attribute;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -31,7 +32,11 @@ class AttributeRepository implements AttributeRepositoryInterface
 
     public function paginate($entityType, $itemPerPage = 20)
     {
-        // TODO: Implement paginate() method.
+        return $this->model
+            ->whereHas('entities', function (Builder $builder) use ($entityType) {
+                $builder->where('entity_type', $entityType);
+            })
+            ->paginate($itemPerPage);
     }
 
     public function create($entityType, array $data)

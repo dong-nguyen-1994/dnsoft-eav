@@ -4,9 +4,9 @@ namespace Dnsoft\Eav\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AttributeVarchars extends Model
+class AttributeVarchar extends Model
 {
-    protected $table = 'attribute_varchars';
+    protected $table = 'attribute_varchar';
 
     protected $fillable = [
         'name',

@@ -2,10 +2,15 @@
 
 namespace Dnsoft\Eav;
 
+use Dnsoft\Core\Events\CoreAdminMenuRegistered;
+use Dnsoft\Eav\Events\EavAdminMenuRegistered;
 use Dnsoft\Eav\Models\Attribute;
 use Dnsoft\Eav\Repositories\AttributeRepository;
 use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Module\Customer\Events\CustomerAdminMenuRegistered;
 
 class EavServiceProvider extends ServiceProvider
 {
@@ -28,7 +33,7 @@ class EavServiceProvider extends ServiceProvider
             __DIR__.'/../public' => public_path('vendor/eav'),
         ], 'dnsoft-admin');
 
-        //Blade::include('eav::form.attributes', 'attributes');
+        Blade::include('eav::form.attributes', 'attributes');
 
 //        Attribute::typeMap([
 //            self::TEXT     => \Rinvex\Attributes\Models\Type\Text::class,
@@ -38,18 +43,14 @@ class EavServiceProvider extends ServiceProvider
 //            self::DATETIME => \Rinvex\Attributes\Models\Type\Datetime::class,
 //            self::IMAGE    => \Newnet\Eav\Models\Type\Image::class,
 //        ]);
-//
-//        Event::listen(CoreAdminMenuRegistered::class, function () {
-//            AdminMenu::addItem(__('eav::menu.attribute.index'), [
-//                'id'         => EavAdminMenuRegistered::ROOT_ID,
-//                'parent'     => CoreAdminMenuRegistered::SYSTEM_ROOT_ID,
-//                'href'       => '#',
-//                'icon'       => 'fas fa-bezier-curve',
-//                'order'      => 10,
-//            ]);
-//
-//            event(new EavAdminMenuRegistered());
-//        });
+
+        Event::listen(CoreAdminMenuRegistered::class, function ($menu) {
+
+            $menu->add('Customer', ['id' => 'customer'])->data('order', 2000)->prepend('<i class="fas fa-users"></i>');
+            $menu->add('Customer', ['route' => 'customer.admin.customer.index', 'parent' => $menu->customer->id]);
+
+            event(new EavAdminMenuRegistered(), $menu);
+        });
     }
 
 }

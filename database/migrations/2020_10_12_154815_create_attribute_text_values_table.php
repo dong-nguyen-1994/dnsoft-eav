@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeOptionsTable extends Migration
+class CreateAttributeTextValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateAttributeOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_options', function (Blueprint $table) {
+        Schema::create('attribute_text_values', function (Blueprint $table) {
             $table->id();
+            $table->text('content');
             $table->unsignedBigInteger('attribute_id');
-            $table->string('value');
-            $table->boolean('is_default')->default(false);
-            $table->integer('sort_order')->nullable();
+            $table->integer('entity_id')->unsigned();
+            $table->string('entity_type');
             $table->timestamps();
+
+            // Indexes
+            $table->foreign('attribute_id')->references('id')->on('attributes')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -30,6 +34,6 @@ class CreateAttributeOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_options');
+        Schema::dropIfExists('attribute_text_values');
     }
 }

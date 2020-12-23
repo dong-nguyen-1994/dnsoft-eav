@@ -5,11 +5,11 @@ namespace Dnsoft\Eav\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Dnsoft\Core\Traits\TranslatableTrait;
-//use Dnsoft\Media\Traits\HasMediaTrait;
+use Dnsoft\Media\Traits\HasMediaTrait;
 use Rinvex\Cacheable\CacheableEloquent;
 
 /**
- * Newnet\Eav\Models\AttributeOption
+ * Dnsoft\Eav\Models\AttributeOption
  *
  * @property int $id
  * @property int|null $attribute_id
@@ -19,25 +19,25 @@ use Rinvex\Cacheable\CacheableEloquent;
  * @property int|null $sort_order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Newnet\Eav\Models\Attribute|null $attribute
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\AttributeOption newModelQuery()
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\AttributeOption newQuery()
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\AttributeOption query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereAttributeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereIsDefault($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereShowFrontend($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\AttributeOption whereValue($value)
+ * @property-read \Dnsoft\Eav\Models\Attribute|null $attribute
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\AttributeOption newModelQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\AttributeOption newQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\AttributeOption query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereAttributeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereIsDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereShowFrontend($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\AttributeOption whereValue($value)
  * @mixin \Eloquent
  */
 class AttributeOption extends Model
 {
 //    use CacheableEloquent;
     use TranslatableTrait;
-//    use HasMediaTrait;
+    use HasMediaTrait;
 
     protected $fillable = [
         'attribute_id',
@@ -66,7 +66,7 @@ class AttributeOption extends Model
         });
     }
 
-    public function attribute()
+    public function attribute(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Attribute::class);
     }

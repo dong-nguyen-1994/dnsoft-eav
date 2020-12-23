@@ -6,7 +6,7 @@ namespace Dnsoft\Eav\Models\Type;
 use Rinvex\Attributes\Models\Value;
 
 /**
- * Newnet\Eav\Models\Type\Image
+ * Dnsoft\Eav\Models\Type\Image
  *
  * @property int $id
  * @property int $content
@@ -17,20 +17,20 @@ use Rinvex\Attributes\Models\Value;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Rinvex\Attributes\Models\Attribute $attribute
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $entity
- * @property-read \Illuminate\Database\Eloquent\Collection|\Newnet\Media\Models\Media[] $media
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Dnsoft\Media\Models\Media[] $media
  * @property-read int|null $media_count
  * @method static \Rinvex\Attributes\Support\ValueCollection|static[] all($columns = ['*'])
  * @method static \Rinvex\Attributes\Support\ValueCollection|static[] get($columns = ['*'])
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Type\Image newModelQuery()
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Type\Image newQuery()
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Type\Image query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereAttributeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereEntityId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereEntityType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Type\Image whereUpdatedAt($value)
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\Type\Image newModelQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\Type\Image newQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\Type\Image query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereAttributeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereEntityType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Type\Image whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Image extends Value

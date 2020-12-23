@@ -3,7 +3,7 @@
 namespace Dnsoft\Eav\Models;
 
 /**
- * Newnet\Eav\Models\Attribute
+ * Dnsoft\Eav\Models\Attribute
  *
  * @property int $id
  * @property string $slug
@@ -22,25 +22,25 @@ namespace Dnsoft\Eav\Models;
  * @property-read int|null $entities_count
  * @property-read mixed $admin_form
  * @property-read array $translations
- * @property \Illuminate\Database\Eloquent\Collection|\Newnet\Eav\Models\AttributeOption[] $options
+ * @property \Illuminate\Database\Eloquent\Collection|\Dnsoft\Eav\Models\AttributeOption[] $options
  * @property-read int|null $options_count
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Attribute newModelQuery()
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Attribute newQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\Attribute newModelQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\Attribute newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Attributes\Models\Attribute ordered($direction = 'asc')
- * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Attribute query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereDefault($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereGroup($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereInputType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereIsCollection($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereIsRequired($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereUpdatedAt($value)
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Dnsoft\Eav\Models\Attribute query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereInputType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereIsCollection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereIsRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Dnsoft\Eav\Models\Attribute whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Attribute extends \Rinvex\Attributes\Models\Attribute
@@ -60,17 +60,17 @@ class Attribute extends \Rinvex\Attributes\Models\Attribute
         'options'
     ];
 
-    public static function getTypeMap()
+    public static function getTypeMap(): array
     {
         return self::$typeMap;
     }
 
-    public function options()
+    public function options(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AttributeOption::class);
     }
 
-    public function getAdminFormAttribute()
+    public function getAdminFormAttribute(): string
     {
         return 'eav::attribute-form.'.$this->input_type;
     }

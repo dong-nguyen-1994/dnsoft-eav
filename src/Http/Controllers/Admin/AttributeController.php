@@ -3,7 +3,10 @@
 namespace Dnsoft\Eav\Http\Controllers\Admin;
 
 use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
+use Dnsoft\Eav\Support\Http\Requests\AttributeRequest;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 
 abstract class AttributeController extends Controller
 {
@@ -36,5 +39,63 @@ abstract class AttributeController extends Controller
             'routeNamePrefix' => $this->getNamePrefixRoute(),
             'item' => null
         ]);
+    }
+
+    public function store(AttributeRequest $request)
+    {
+        $item = $this->attributeRepository->create($this->getEntityType(), $request->all());
+
+        if ($request->input('continue')) {
+            return redirect()
+                ->route($this->getNamePrefixRoute().'edit', $item->id)
+                ->with('success', __('eav::attribute.notification.created'));
+        }
+
+        return redirect()
+            ->route($this->getNamePrefixRoute().'index')
+            ->with('success', __('eav::attribute.notification.created'));
+    }
+
+    public function edit($id)
+    {
+//        \AdminMenu::activeMenu($this->getAdminMenuId());
+
+        $item = $this->attributeRepository->find($id);
+
+        return view('eav::admin.attribute.edit')->with([
+            'item'            => $item,
+            'routeNamePrefix' => $this->getNamePrefixRoute(),
+        ]);
+    }
+
+    public function update($id, AttributeRequest $request)
+    {
+        $item = $this->attributeRepository->update($this->getEntityType(), $request->all(), $id);
+
+        if ($request->input('continue')) {
+            return redirect()
+                ->route($this->getNamePrefixRoute().'edit', $item->id)
+                ->with('success', __('eav::attribute.notification.updated'));
+        }
+
+        return redirect()
+            ->route($this->getNamePrefixRoute().'index')
+            ->with('success', __('eav::attribute.notification.updated'));
+    }
+
+    public function destroy($id, Request $request)
+    {
+        $this->attributeRepository->delete($id);
+
+        if ($request->wantsJson()) {
+            Session::flash('success', __('eav::attribute.notification.deleted'));
+            return response()->json([
+                'success' => true,
+            ]);
+        }
+
+        return redirect()
+            ->route($this->getNamePrefixRoute().'index')
+            ->with('success', __('eav::attribute.notification.deleted'));
     }
 }

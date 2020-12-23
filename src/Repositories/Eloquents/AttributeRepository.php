@@ -1,28 +1,20 @@
 <?php
 
-namespace Dnsoft\Eav\Repositories;
+namespace Dnsoft\Eav\Repositories\Eloquent;
 
-use Dnsoft\Eav\Models\Attribute;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use Dnsoft\Eav\EavServiceProvider;
+use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
 
 class AttributeRepository implements AttributeRepositoryInterface
 {
-    public $model;
-    /**
-     * AttributeRepository constructor.
-     * @param Model $model
-     */
+    /** @var Model|\Eloquent */
+    protected $model;
+
     public function __construct(Model $model)
     {
         $this->model = $model;
-    }
-
-    public function all($entityType, $columns = ['*'])
-    {
-        // TODO: Implement all() method.
     }
 
     public function find($id, $columns = ['*'])
@@ -41,12 +33,30 @@ class AttributeRepository implements AttributeRepositoryInterface
 
     public function create($entityType, array $data)
     {
-        // TODO: Implement create() method.
+        $data['type'] = EavServiceProvider::$mapInputType[$data['input_type']];
+        $data['is_collection'] = EavServiceProvider::$isCollection[$data['input_type']];
+
+        $attribute = $this->model->create($data);
+
+        $attribute->entities()->firstOrCreate(['entity_type' => $entityType]);
+
+        return $attribute;
     }
 
     public function update($entityType, array $data, $id)
     {
-        // TODO: Implement update() method.
+        $attribute = $this->find($id);
+
+        if (!empty($data['input_type'])) {
+            $data['type'] = EavServiceProvider::$mapInputType[$data['input_type']];
+            $data['is_collection'] = EavServiceProvider::$isCollection[$data['input_type']];
+        }
+
+        $attribute->update($data);
+
+        $attribute->entities()->firstOrCreate(['entity_type' => $entityType]);
+
+        return $attribute;
     }
 
     public function delete($id)
@@ -54,5 +64,14 @@ class AttributeRepository implements AttributeRepositoryInterface
         $attibute = $this->find($id);
 
         return $attibute->delete();
+    }
+
+    public function all($entityType, $columns = ['*'])
+    {
+        return $this->model
+            ->whereHas('entities', function (Builder $builder) use ($entityType) {
+                $builder->where('entity_type', $entityType);
+            })
+            ->get();
     }
 }

@@ -2,57 +2,101 @@
 
 namespace Dnsoft\Eav\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-
-class Attribute extends Model
+/**
+ * Newnet\Eav\Models\Attribute
+ *
+ * @property int $id
+ * @property string $slug
+ * @property array $name
+ * @property array|null $description
+ * @property int $sort_order
+ * @property string|null $group
+ * @property string $type
+ * @property string|null $input_type
+ * @property bool $is_required
+ * @property bool $is_collection
+ * @property string|null $default
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property array $entities
+ * @property-read int|null $entities_count
+ * @property-read mixed $admin_form
+ * @property-read array $translations
+ * @property \Illuminate\Database\Eloquent\Collection|\Newnet\Eav\Models\AttributeOption[] $options
+ * @property-read int|null $options_count
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Attribute newModelQuery()
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Attribute newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Attributes\Models\Attribute ordered($direction = 'asc')
+ * @method static \Rinvex\Cacheable\EloquentBuilder|\Newnet\Eav\Models\Attribute query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereInputType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereIsCollection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereIsRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Newnet\Eav\Models\Attribute whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+class Attribute extends \Rinvex\Attributes\Models\Attribute
 {
-    protected $table = 'attributes';
-
     protected $fillable = [
         'name',
         'slug',
-        'input_type',
         'description',
+        'sort_order',
+        'group',
+        'type',
+        'input_type',
+        'is_required',
         'is_collection',
+        'default',
         'entities',
+        'options'
     ];
+
+    public static function getTypeMap()
+    {
+        return self::$typeMap;
+    }
 
     public function options()
     {
         return $this->hasMany(AttributeOption::class);
     }
 
-    public function entities()
+    public function getAdminFormAttribute()
     {
-        return $this->hasMany(AttributeEntity::class, 'attribute_id', 'id');
+        return 'eav::attribute-form.'.$this->input_type;
     }
 
-    /**
-     * Access entities relation and retrieve entity types as an array,
-     * Accessors/Mutators preceeds relation value when called dynamically.
-     *
-     * @return array
-     */
-    public function getEntitiesAttribute(): array
+    public function setOptionsAttribute($options)
     {
-        return $this->entities()->pluck('entity_type')->toArray();
-    }
+        $oldOptionIds = $this->options()->pluck('id')->toArray();
+        $inputOptionIds = collect($options)->pluck('id')->map(function ($item) {return (int) $item;})->toArray();
+        $removeOptionIds = array_values(array_diff($oldOptionIds, $inputOptionIds));
 
-    /**
-     * Set the attribute attached entities.
-     *
-     * @param mixed $entities
-     *
-     * @return void
-     */
-    public function setEntitiesAttribute($entities): void
-    {
-        static::saved(function ($model) use ($entities) {
-            $this->entities()->delete();
-            ! $entities || $this->entities()->createMany(array_map(function ($entity) {
-                return ['entity_type' => $entity];
-            }, $entities));
+        static::saved(function ($model) use ($removeOptionIds, $options) {
+            $this->options()->whereIn('id', $removeOptionIds)->delete();
+
+            $i = 1;
+            foreach ($options as $option) {
+                if (!empty($option['value'])) {
+                    $this->options()->updateOrCreate([
+                        'id' => $option['id'] ?? 0,
+                    ], [
+                        'value'      => $option['value'],
+                        'image'      => $option['image'] ?? null,
+                        'is_default' => $option['is_default'] ?? 0,
+                        'sort_order' => $i++,
+                    ]);
+                }
+            }
         });
     }
 }

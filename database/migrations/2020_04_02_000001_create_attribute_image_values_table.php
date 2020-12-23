@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateAttributeImageValuesTable extends Migration
 {
@@ -11,12 +11,13 @@ class CreateAttributeImageValuesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('attribute_image_values', function (Blueprint $table) {
-            $table->id();
+            // Columns
+            $table->increments('id');
             $table->integer('content');
-            $table->unsignedBigInteger('attribute_id');
+            $table->integer('attribute_id')->unsigned();
             $table->integer('entity_id')->unsigned();
             $table->string('entity_type');
             $table->timestamps();
@@ -25,7 +26,7 @@ class CreateAttributeImageValuesTable extends Migration
             $table
                 ->foreign('attribute_id')
                 ->references('id')
-                ->on('attributes')
+                ->on(config('rinvex.attributes.tables.attributes'))
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -36,7 +37,7 @@ class CreateAttributeImageValuesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('attribute_image_values');
     }

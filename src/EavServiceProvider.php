@@ -10,7 +10,6 @@ use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Module\Customer\Events\CustomerAdminMenuRegistered;
 
 class EavServiceProvider extends ServiceProvider
 {
@@ -48,7 +47,7 @@ class EavServiceProvider extends ServiceProvider
         //$this->app->singleton('rinvex.attributes.attribute', Attribute::class);
 
         $this->app->singleton(AttributeRepositoryInterface::class, function () {
-            return new AttributeRepository(new Attribute());
+            return new \Dnsoft\Eav\Repositories\Eloquent\AttributeRepository(new Attribute());
         });
     }
 
@@ -60,20 +59,20 @@ class EavServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/eav'),
-        ], 'dnsoft-admin');
+        ], 'dnsoft-assets-eav');
 
         Blade::include('eav::form.attributes', 'attributes');
 
         require_once __DIR__.'/../helpers/helpers.php';
 
-//        Attribute::typeMap([
-//            self::TEXT     => \Rinvex\Attributes\Models\Type\Text::class,
-//            self::BOOLEAN  => \Rinvex\Attributes\Models\Type\Boolean::class,
-//            self::INTEGER  => \Rinvex\Attributes\Models\Type\Integer::class,
-//            self::VARCHAR  => \Rinvex\Attributes\Models\Type\Varchar::class,
-//            self::DATETIME => \Rinvex\Attributes\Models\Type\Datetime::class,
-//            self::IMAGE    => \Newnet\Eav\Models\Type\Image::class,
-//        ]);
+        Attribute::typeMap([
+            self::TEXT     => \Dnsoft\Eav\Models\Type\Text::class,
+            self::BOOLEAN  => \Rinvex\Attributes\Models\Type\Boolean::class,
+            self::INTEGER  => \Rinvex\Attributes\Models\Type\Integer::class,
+            self::VARCHAR  => \Dnsoft\Eav\Models\Type\Varchar::class,
+            self::DATETIME => \Rinvex\Attributes\Models\Type\Datetime::class,
+            self::IMAGE    => \Dnsoft\Eav\Models\Type\Image::class,
+        ]);
 
         Event::listen(CoreAdminMenuRegistered::class, function ($menu) {
 

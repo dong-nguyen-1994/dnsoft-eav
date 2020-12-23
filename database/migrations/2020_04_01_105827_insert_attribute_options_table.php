@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeOptionsTable extends Migration
+class InsertAttributeOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,16 @@ class CreateAttributeOptionsTable extends Migration
     public function up()
     {
         Schema::create('attribute_options', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('attribute_id');
-            $table->string('value');
+            $table->bigIncrements('id');
+            $table->unsignedInteger('attribute_id')->nullable();
+            $table->string('value')->nullable();
             $table->boolean('is_default')->default(false);
-            $table->integer('sort_order')->nullable();
+            $table->boolean('show_frontend')->default(true);
+            $table->unsignedMediumInteger('sort_order')->nullable();
             $table->timestamps();
+
+            $attributeTable = config('rinvex.attributes.tables.attributes');
+            $table->foreign('attribute_id')->references('id')->on($attributeTable)->onDelete('cascade');
         });
     }
 

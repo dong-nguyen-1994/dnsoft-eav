@@ -1,78 +1,51 @@
 @extends('core::admin.master')
 
-@section('meta_title', __('catalog::product.create.page_title'))
+@section('meta_title', __('eav::attribute.edit.page_title'))
 
-@section('content-header')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('catalog.admin.product-set.index') }}">{{ __('catalog::product.index.page_title') }}</a></li>
-                        <li class="breadcrumb-item active">{{ __('catalog::product.create.page_title') }}</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">{{ __('catalog::product.create.page_title') }}</h4>
-            </div>
-        </div>
-    </div>
-@endsection
+@section('page_title', __('eav::attribute.edit.page_title'))
+
+@section('page_subtitle', __('eav::attribute.edit.page_subtitle'))
+
+@section('breadcrumb')
+    <nav aria-label="breadcrumb" class="col-sm-4 order-sm-last mb-3 mb-sm-0 p-0 ">
+        <ol class="breadcrumb d-inline-flex font-weight-600 fs-13 bg-white mb-0 float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.index') }}">{{ trans('dashboard::message.index.breadcrumb') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route($routeNamePrefix.'index') }}">{{ trans('eav::attribute.index.breadcrumb') }}</a></li>
+            <li class="breadcrumb-item active">{{ trans('eav::attribute.edit.breadcrumb') }}</li>
+        </ol>
+    </nav>
+@stop
 
 @section('content')
-    <div class="container-fluid">
-        <form role="form" action="{{ route('catalog.admin.product.store') }}" method="POST">
-            @csrf
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">{{ __('catalog::product.create.page_title') }}</h3>
+    <form action="{{ route($routeNamePrefix.'update', $item->id) }}" method="POST" enctype="multipart/form-data">
+        @method('PUT')
+        @csrf
 
-                        </div>
-
-                        @include('eav::admin.attribute._fields', ['item' => $item])
-
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">{{ __('core::button.save') }}</button>
-                            <button class="btn btn-secondary" name="continue" value="1" type="submit">{{ __('core::button.save_and_edit') }}</button>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fs-17 font-weight-600 mb-0">
+                            {{ __('eav::attribute.edit.page_title') }}
+                        </h6>
+                    </div>
+                    <div class="text-right">
+                        <div class="btn-group">
+                            <button class="btn btn-success" type="submit">{{ __('core::button.save') }}</button>
+                            <button class="btn btn-primary" name="continue" value="1" type="submit">{{ __('core::button.save_and_edit') }}</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="card-body">
+                @include('eav::admin.attribute._fields', ['item' => $item])
+            </div>
+            <div class="card-footer text-right">
+                <div class="btn-group">
+                    <button class="btn btn-success" type="submit">{{ __('core::button.save') }}</button>
+                    <button class="btn btn-primary" name="continue" value="1" type="submit">{{ __('core::button.save_and_edit') }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
 @stop
-
-{{--@section('content')--}}
-{{--    <form action="{{ route('catalog.admin.product.store') }}" method="POST" enctype="multipart/form-data">--}}
-{{--        @csrf--}}
-
-{{--        <div class="card mb-4">--}}
-{{--            <div class="card-header">--}}
-{{--                <div class="d-flex justify-content-between align-items-center">--}}
-{{--                    <div>--}}
-{{--                        <h6 class="fs-17 font-weight-600 mb-0">--}}
-{{--                            {{ __('catalog::product.create.page_title') }}--}}
-{{--                        </h6>--}}
-{{--                    </div>--}}
-{{--                    <div class="text-right">--}}
-{{--                        <div class="btn-group">--}}
-{{--                            <button class="btn btn-success" type="submit">{{ __('core::button.save') }}</button>--}}
-{{--                            <button class="btn btn-primary" name="continue" value="1" type="submit">{{ __('core::button.save_and_edit') }}</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="card-body">--}}
-{{--                @include('catalog::admin.product._fields', ['item' => $item])--}}
-{{--            </div>--}}
-{{--            <div class="card-footer text-right">--}}
-{{--                <div class="btn-group">--}}
-{{--                    <button class="btn btn-success" type="submit">{{ __('core::button.save') }}</button>--}}
-{{--                    <button class="btn btn-primary" name="continue" value="1" type="submit">{{ __('core::button.save_and_edit') }}</button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </form>--}}
-{{--@stop--}}

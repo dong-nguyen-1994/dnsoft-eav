@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">{{ trans('eav::attribute.edit.breadcrumb') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ __('eav::attribute.create.page_title') }}</h4>
+                <h4 class="page-title">{{ __('eav::attribute.edit.page_title') }}</h4>
             </div>
         </div>
     </div>

@@ -2,19 +2,22 @@
 
 @section('meta_title', __('eav::attribute.edit.page_title'))
 
-@section('page_title', __('eav::attribute.edit.page_title'))
-
-@section('page_subtitle', __('eav::attribute.edit.page_subtitle'))
-
-@section('breadcrumb')
-    <nav aria-label="breadcrumb" class="col-sm-4 order-sm-last mb-3 mb-sm-0 p-0 ">
-        <ol class="breadcrumb d-inline-flex font-weight-600 fs-13 bg-white mb-0 float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.index') }}">{{ trans('dashboard::message.index.breadcrumb') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route($routeNamePrefix.'index') }}">{{ trans('eav::attribute.index.breadcrumb') }}</a></li>
-            <li class="breadcrumb-item active">{{ trans('eav::attribute.edit.breadcrumb') }}</li>
-        </ol>
-    </nav>
-@stop
+@section('content-header')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.index') }}">{{ trans('dashboard::message.index.breadcrumb') }}</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route($routeNamePrefix.'index') }}">{{ trans('eav::attribute.index.breadcrumb') }}</a></li>
+                        <li class="breadcrumb-item active">{{ trans('eav::attribute.edit.breadcrumb') }}</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">{{ __('eav::attribute.create.page_title') }}</h4>
+            </div>
+        </div>
+    </div>
+@endsection
 
 @section('content')
     <form action="{{ route($routeNamePrefix.'update', $item->id) }}" method="POST" enctype="multipart/form-data">
@@ -25,9 +28,9 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="fs-17 font-weight-600 mb-0">
+                        <h4 class="fs-17 font-weight-600 mb-0">
                             {{ __('eav::attribute.edit.page_title') }}
-                        </h6>
+                        </h4>
                     </div>
                     <div class="text-right">
                         <div class="btn-group">

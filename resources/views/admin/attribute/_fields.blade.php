@@ -2,7 +2,8 @@
 @slug([
     'name' => 'slug',
     'label' => __('eav::attribute.slug'),
-    'disabledx' => object_get($item, 'exists')
+    'disabledx' => object_get($item, 'exists'),
+    'field_slug' => 'name'
 ])
 @select([
     'name' => 'input_type',

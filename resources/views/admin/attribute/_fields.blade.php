@@ -116,14 +116,10 @@
     </tr>
 </script>
 
-{{--@assetadd('jquery-ui', asset('vendor/newnet-admin/plugins/jquery-ui/jquery-ui.min.css'))--}}
-{{--@assetadd('jquery-ui', asset('vendor/newnet-admin/plugins/jquery-ui/jquery-ui.min.js'), ['jquery'])--}}
-{{--@assetadd('attribute-script', 'vendor/eav/admin/js/attribute.js', ['jquery'])--}}
-{{--@assetadd('attribute-style', 'vendor/eav/admin/css/attribuypte.css')--}}
 @push('styles')
     <link rel="stylesheet" href="{{ asset('vendor/eav/admin/css/attribute.css') }}">
 @endpush
 
 @push('scripts')
-    <script href="{{ asset('vendor/eav/admin/js/attribute.js') }}"></script>
+    <script src="{{ asset('vendor/eav/admin/js/attribute.js') }}"></script>
 @endpush

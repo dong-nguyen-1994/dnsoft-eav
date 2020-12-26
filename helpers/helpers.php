@@ -32,7 +32,8 @@ if (!function_exists('eav_attribute')) {
     }
 }
 
-if (!function_exists('get_attribute_option_values')) {
+if (!function_exists('get_attribute_option_values'))
+{
     /**
      * Get Attribute Option Values
      *

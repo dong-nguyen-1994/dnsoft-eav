@@ -2,7 +2,7 @@
 
 namespace Dnsoft\Eav\Models\Type;
 
-//use Dnsoft\Media\Traits\HasMediaTrait;
+use Dnsoft\Media\Traits\HasMediaTrait;
 use Rinvex\Attributes\Models\Value;
 
 /**
@@ -35,7 +35,7 @@ use Rinvex\Attributes\Models\Value;
  */
 class Image extends Value
 {
-//    use HasMediaTrait;
+    use HasMediaTrait;
 
     /**
      * {@inheritdoc}

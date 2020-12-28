@@ -22,7 +22,6 @@
 @section('content')
     <form action="{{ route($routeNamePrefix.'store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
         <div class="card mb-4">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">

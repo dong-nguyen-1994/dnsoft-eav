@@ -2,6 +2,7 @@
 
 namespace Dnsoft\Eav\Http\Controllers\Admin;
 
+use Dnsoft\Core\Facades\MenuAdmin;
 use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
 use Dnsoft\Eav\Support\Http\Requests\AttributeRequest;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ abstract class AttributeController extends Controller
 
     public function create()
     {
+        MenuAdmin::activeMenu($this->getAdminMenuId());
         return view('eav::admin.attribute.create')->with([
             'routeNamePrefix' => $this->getNamePrefixRoute(),
             'item' => null
@@ -58,8 +60,7 @@ abstract class AttributeController extends Controller
 
     public function edit($id)
     {
-//        \AdminMenu::activeMenu($this->getAdminMenuId());
-
+        MenuAdmin::activeMenu($this->getAdminMenuId());
         $item = $this->attributeRepository->find($id);
 
         return view('eav::admin.attribute.edit')->with([

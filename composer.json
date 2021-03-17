@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "dnsoft/eav": "dev-master"
+        "rinvex/laravel-attributes": "^5.0.0"
     },
     "minimum-stability": "dev",
     "autoload": {

@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "rinvex/laravel-attributes": "^5.0.0"
+        "rinvex/laravel-attributes": "^4.1.0"
     },
     "autoload": {
         "psr-4": {

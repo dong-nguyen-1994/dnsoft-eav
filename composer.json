@@ -1,7 +1,6 @@
 {
     "name": "dnsoft/eav",
     "description": "This is module EAV",
-    "type": "library",
     "authors": [
         {
             "name": "Dong Nguyen",
@@ -11,7 +10,6 @@
     "require": {
         "rinvex/laravel-attributes": "^5.0.0"
     },
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Dnsoft\\Eav\\": "src/"

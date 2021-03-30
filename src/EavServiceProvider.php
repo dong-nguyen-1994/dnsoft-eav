@@ -5,7 +5,6 @@ namespace Dnsoft\Eav;
 use Dnsoft\Core\Events\CoreAdminMenuRegistered;
 use Dnsoft\Eav\Events\EavAdminMenuRegistered;
 use Dnsoft\Eav\Models\Attribute;
-use Dnsoft\Eav\Repositories\AttributeRepository;
 use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
@@ -47,7 +46,7 @@ class EavServiceProvider extends ServiceProvider
         //$this->app->singleton('rinvex.attributes.attribute', Attribute::class);
 
         $this->app->singleton(AttributeRepositoryInterface::class, function () {
-            return new \Dnsoft\Eav\Repositories\Eloquent\AttributeRepository(new Attribute());
+            return new \Dnsoft\Eav\Repositories\Eloquents\AttributeRepository(new Attribute());
         });
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsoft\Eav\Repositories\Eloquent;
+namespace Dnsoft\Eav\Repositories\Eloquents;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

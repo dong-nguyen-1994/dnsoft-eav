@@ -4,7 +4,7 @@ namespace Dnsoft\Eav\Http\Controllers\Admin;
 
 use Dnsoft\Core\Facades\MenuAdmin;
 use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
-use Dnsoft\Eav\Support\Http\Requests\AttributeRequest;
+use Dnsoft\Eav\Http\Requests\AttributeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;

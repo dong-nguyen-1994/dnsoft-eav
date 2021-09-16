@@ -2,6 +2,7 @@
 
 namespace Dnsoft\Eav\Models;
 
+use Dnsoft\Media\Traits\HasMediaTraitFileManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Dnsoft\Core\Traits\TranslatableTrait;
@@ -37,8 +38,8 @@ class AttributeOption extends Model
 {
 //    use CacheableEloquent;
     use TranslatableTrait;
-    use HasMediaTrait;
-
+    use HasMediaTraitFileManager;
+//    use HasMediaTrait;
     protected $fillable = [
         'attribute_id',
         'value',
@@ -73,11 +74,11 @@ class AttributeOption extends Model
 
     public function setImageAttribute($value)
     {
-        $this->mediaAttributes['image'] = $value;
+        $this->mediaAttributes['eav_image'] = $value;
     }
 
     public function getImageAttribute()
     {
-        return $this->getFirstMedia('image');
+        return $this->getFirstMedia('eav_image');
     }
 }

@@ -45,7 +45,7 @@
                         <input type="text" name="options[{{ $opt->id }}][value]" value="{{ $opt->value }}">
                     </td>
                     <td>
-                        @media(['name' => "options[{$opt->id}][image]", 'label' => '', 'value' => $opt->image])
+                        @singleFile(['type' => 'image', 'name' => "options[{$opt->id}][image]", 'label' => '', 'value' => $opt->image, 'type' => 'image', 'id' => $opt->id])
                     </td>
                     <td>
                         <a href="#" class="delete btn btn-danger">
@@ -70,7 +70,7 @@
                         <input type="text" name="options[option_1][value]">
                     </td>
                     <td>
-                        @media(['name' => "options[option_1][image]", 'label' => ''])
+                        @singleFile(['name' => "options[option_1][image]", 'label' => '', 'type' => 'image', 'id' => 'option_1',])
                     </td>
                     <td>
                         <a href="#" class="delete btn btn-danger">
@@ -106,7 +106,7 @@
             <input type="text" name="options[__OPTION_ID__][value]">
         </td>
         <td>
-            @media(['name' => "options[__OPTION_ID__][image]", 'label' => ''])
+            @singleFile(['name' => "options[__OPTION_ID__][image]", 'label' => '', 'type' => 'image', 'id' => '__OPTION_ID__',])
         </td>
         <td>
             <a href="#" class="delete btn btn-danger">

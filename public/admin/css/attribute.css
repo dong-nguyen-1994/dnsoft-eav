@@ -44,3 +44,10 @@
     color: #303030;
     background-color: #fff;
 }
+
+.input-group-btn {
+    margin-top: -25px;
+}
+.img-thumbs {
+    height: 4rem !important;
+}

@@ -79,6 +79,6 @@ class AttributeOption extends Model
 
     public function getImageAttribute()
     {
-        return $this->getFirstMedia('eav_image');
+        return $this->getFirstMedia('product/attribute', 'eav_image');
     }
 }

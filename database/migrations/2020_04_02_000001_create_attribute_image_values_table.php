@@ -16,7 +16,7 @@ class CreateAttributeImageValuesTable extends Migration
         Schema::create('attribute_image_values', function (Blueprint $table) {
             // Columns
             $table->increments('id');
-            $table->integer('content');
+            $table->text('content');
             $table->integer('attribute_id')->unsigned();
             $table->integer('entity_id')->unsigned();
             $table->string('entity_type');

@@ -1,8 +1,8 @@
 <?php
 
-namespace Dnsoft\Eav\Models\Type;
+namespace DnSoft\Eav\Models\Type;
 
-use Dnsoft\Core\Traits\TranslatableTrait;
+use DnSoft\Core\Traits\TranslatableTrait;
 
 class Varchar extends \Rinvex\Attributes\Models\Type\Varchar
 {

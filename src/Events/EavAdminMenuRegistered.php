@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsoft\Eav\Events;
+namespace DnSoft\Eav\Events;
 
 class EavAdminMenuRegistered
 {

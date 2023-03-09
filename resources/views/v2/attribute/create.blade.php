@@ -1,4 +1,4 @@
-@extends('core::admin.master')
+@extends('core::v2.admin.master')
 
 @section('meta_title', __('eav::attribute.create.page_title'))
 

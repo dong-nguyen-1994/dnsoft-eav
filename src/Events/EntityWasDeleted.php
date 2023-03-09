@@ -1,8 +1,6 @@
 <?php
 
-
-namespace Dnsoft\Eav\Events;
-
+namespace DnSoft\Eav\Events;
 
 use Illuminate\Database\Eloquent\Model as Entity;
 use Illuminate\Database\Eloquent\SoftDeletes;

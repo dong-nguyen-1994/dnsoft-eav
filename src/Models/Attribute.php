@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsoft\Eav\Models;
+namespace DnSoft\Eav\Models;
 
 /**
  * Dnsoft\Eav\Models\Attribute

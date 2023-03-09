@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsoft\Eav\Http\Requests;
+namespace DnSoft\Eav\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

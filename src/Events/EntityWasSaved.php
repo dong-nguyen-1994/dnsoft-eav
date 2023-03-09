@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsoft\Eav\Events;
+namespace DnSoft\Eav\Events;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model as Entity;

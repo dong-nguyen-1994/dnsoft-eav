@@ -1,10 +1,10 @@
 <?php
 
-namespace Dnsoft\Eav\Traits;
+namespace DnSoft\Eav\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use Dnsoft\Eav\Events\EntityWasDeleted;
-use Dnsoft\Eav\Events\EntityWasSaved;
+use DnSoft\Eav\Events\EntityWasDeleted;
+use DnSoft\Eav\Events\EntityWasSaved;
 use Rinvex\Attributes\Models\Value;
 use Rinvex\Attributes\Scopes\EagerLoadScope;
 use Rinvex\Attributes\Support\ValueCollection;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Dnsoft\Eav\Repositories;
+namespace DnSoft\Eav\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Dnsoft\Eav\Models\Attribute;
+use DnSoft\Eav\Models\Attribute;
 
 interface AttributeRepositoryInterface
 {

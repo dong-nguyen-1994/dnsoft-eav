@@ -1,10 +1,10 @@
 <?php
 
-namespace Dnsoft\Eav\Http\Controllers\Admin;
+namespace DnSoft\Eav\Http\Controllers\Admin;
 
-use Dnsoft\Core\Facades\MenuAdmin;
-use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
-use Dnsoft\Eav\Http\Requests\AttributeRequest;
+use DnSoft\Core\Facades\MenuAdmin;
+use DnSoft\Eav\Repositories\AttributeRepositoryInterface;
+use DnSoft\Eav\Http\Requests\AttributeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +28,8 @@ abstract class AttributeController extends Controller
     public function index()
     {
         $items = $this->attributeRepository->paginate($this->getEntityType(), 20);
-        return view('eav::admin.attribute.index', [
+        $version = get_version_actived();
+        return view("eav::$version.admin.attribute.index", [
             'items'           => $items,
             'routeNamePrefix' => $this->getNamePrefixRoute(),
         ]);
@@ -37,7 +38,8 @@ abstract class AttributeController extends Controller
     public function create()
     {
         MenuAdmin::activeMenu($this->getAdminMenuId());
-        return view('eav::admin.attribute.create')->with([
+        $version = get_version_actived();
+        return view("eav::$version.admin.attribute.create")->with([
             'routeNamePrefix' => $this->getNamePrefixRoute(),
             'item' => null
         ]);
@@ -62,8 +64,8 @@ abstract class AttributeController extends Controller
     {
         MenuAdmin::activeMenu($this->getAdminMenuId());
         $item = $this->attributeRepository->find($id);
-
-        return view('eav::admin.attribute.edit')->with([
+        $version = get_version_actived();
+        return view("eav::$version.admin.attribute.edit")->with([
             'item'            => $item,
             'routeNamePrefix' => $this->getNamePrefixRoute(),
         ]);

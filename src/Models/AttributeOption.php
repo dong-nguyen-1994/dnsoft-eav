@@ -1,16 +1,16 @@
 <?php
 
-namespace Dnsoft\Eav\Models;
+namespace DnSoft\Eav\Models;
 
-use Dnsoft\Media\Traits\HasMediaTraitFileManager;
+use DnSoft\Media\Traits\HasMediaTraitFileManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Dnsoft\Core\Traits\TranslatableTrait;
-use Dnsoft\Media\Traits\HasMediaTrait;
+use DnSoft\Core\Traits\TranslatableTrait;
+use DnSoft\Media\Traits\HasMediaTrait;
 use Rinvex\Cacheable\CacheableEloquent;
 
 /**
- * Dnsoft\Eav\Models\AttributeOption
+ * DnSoft\Eav\Models\AttributeOption
  *
  * @property int $id
  * @property int|null $attribute_id

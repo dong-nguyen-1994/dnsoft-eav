@@ -1,11 +1,11 @@
 <?php
 
-namespace Dnsoft\Eav\Repositories\Eloquents;
+namespace DnSoft\Eav\Repositories\Eloquents;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Dnsoft\Eav\EavServiceProvider;
-use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
+use DnSoft\Eav\EavServiceProvider;
+use DnSoft\Eav\Repositories\AttributeRepositoryInterface;
 
 class AttributeRepository implements AttributeRepositoryInterface
 {

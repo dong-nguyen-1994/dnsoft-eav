@@ -1,11 +1,11 @@
 <?php
 
-namespace Dnsoft\Eav;
+namespace DnSoft\Eav;
 
-use Dnsoft\Core\Events\CoreAdminMenuRegistered;
-use Dnsoft\Eav\Events\EavAdminMenuRegistered;
-use Dnsoft\Eav\Models\Attribute;
-use Dnsoft\Eav\Repositories\AttributeRepositoryInterface;
+use DnSoft\Core\Events\CoreAdminMenuRegistered;
+use DnSoft\Eav\Events\EavAdminMenuRegistered;
+use DnSoft\Eav\Models\Attribute;
+use DnSoft\Eav\Repositories\AttributeRepositoryInterface;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;

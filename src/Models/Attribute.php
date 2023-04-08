@@ -45,58 +45,63 @@ namespace DnSoft\Eav\Models;
  */
 class Attribute extends \Rinvex\Attributes\Models\Attribute
 {
-    protected $fillable = [
-        'name',
-        'slug',
-        'description',
-        'sort_order',
-        'group',
-        'type',
-        'input_type',
-        'is_required',
-        'is_collection',
-        'default',
-        'entities',
-        'options'
-    ];
+  protected $fillable = [
+    'name',
+    'slug',
+    'description',
+    'sort_order',
+    'group',
+    'type',
+    'input_type',
+    'is_required',
+    'is_collection',
+    'default',
+    'entities',
+    'options'
+  ];
 
-    public static function getTypeMap(): array
-    {
-        return self::$typeMap;
-    }
+  public static function getTypeMap(): array
+  {
+    return self::$typeMap;
+  }
 
-    public function options(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(AttributeOption::class);
-    }
+  public function options(): \Illuminate\Database\Eloquent\Relations\HasMany
+  {
+    return $this->hasMany(AttributeOption::class);
+  }
 
-    public function getAdminFormAttribute(): string
-    {
-        return 'eav::attribute-form.'.$this->input_type;
-    }
+  public function getAdminFormAttribute(): string
+  {
+    $version = get_version_actived();
+    return "eav::$version.admin.attribute-form." . $this->input_type;
+  }
 
-    public function setOptionsAttribute($options)
-    {
-        $oldOptionIds = $this->options()->pluck('id')->toArray();
-        $inputOptionIds = collect($options)->pluck('id')->map(function ($item) {return (int) $item;})->toArray();
-        $removeOptionIds = array_values(array_diff($oldOptionIds, $inputOptionIds));
+  public function setOptionsAttribute($options)
+  {
+    $oldOptionIds = $this->options()->pluck('id')->toArray();
+    $inputOptionIds = collect($options)->pluck('id')->map(function ($item) {
+      return (int) $item;
+    })->toArray();
+    $removeOptionIds = array_values(array_diff($oldOptionIds, $inputOptionIds));
 
-        static::saved(function ($model) use ($removeOptionIds, $options) {
-            $this->options()->whereIn('id', $removeOptionIds)->delete();
+    static::saved(function ($model) use ($removeOptionIds, $options) {
+      $this->options()->whereIn('id', $removeOptionIds)->delete();
 
-            $i = 1;
-            foreach ($options as $option) {
-                if (!empty($option['value'])) {
-                    $this->options()->updateOrCreate([
-                        'id' => $option['id'] ?? 0,
-                    ], [
-                        'value'      => $option['value'],
-                        'image'      => $option['image'] ?? null,
-                        'is_default' => $option['is_default'] ?? 0,
-                        'sort_order' => $i++,
-                    ]);
-                }
-            }
-        });
-    }
+      $i = 1;
+      foreach ($options as $option) {
+        if (!empty($option['value'])) {
+          $this->options()->updateOrCreate([
+            'id' => $option['id'] ?? 0,
+          ], [
+            'title'      => $option['title'],
+            'value'      => $option['value'],
+            'color'      => $option['color'],
+            // 'image'      => $option['image'] ?? null,
+            'is_default' => $option['is_default'] ?? 0,
+            'sort_order' => $i++,
+          ]);
+        }
+      }
+    });
+  }
 }

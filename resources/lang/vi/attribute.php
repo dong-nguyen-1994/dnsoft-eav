@@ -41,7 +41,9 @@ return [
     'manager_option_value' => [
         'label'         => 'Manage Options (Values of Attribute)',
         'is_default'    => 'Is Default',
+        'title'         => 'Title',
         'value'         => 'Value',
+        'color'         => 'Color',
         'add_option'    => 'Add Option',
         'clear_default' => 'Clear Default',
         'image'         => 'Hình ảnh',

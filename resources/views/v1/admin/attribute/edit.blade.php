@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @include('eav::admin.attribute._fields', ['item' => $item])
+                @include('eav::v1.admin.attribute._fields', ['item' => $item])
             </div>
             <div class="card-footer text-right">
                 <div class="btn-group">

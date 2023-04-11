@@ -47,10 +47,13 @@ class AttributeOption extends Model
         'show_frontend',
         'sort_order',
         'image',
+        'title',
+        'color',
     ];
 
     public $translatable = [
         'value',
+        'title'
     ];
 
     protected $casts = [

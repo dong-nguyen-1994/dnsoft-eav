@@ -1,136 +1,156 @@
 @input(['name' => 'name', 'label' => __('eav::attribute.name')])
 @slug([
-    'name' => 'slug',
-    'label' => __('eav::attribute.slug'),
-    'disabledx' => object_get($item, 'exists'),
-    'field_slug' => 'name'
+'name' => 'slug',
+'label' => __('eav::attribute.slug'),
+'disabledx' => object_get($item, 'exists'),
+'field_slug' => 'name'
 ])
 @select([
-    'name' => 'input_type',
-    'label' => __('eav::attribute.input_type'),
-    'options' => get_attribute_input_type_options(),
-    'default' => 'text',
-    'disabled' => object_get($item, 'exists')
+'name' => 'input_type',
+'label' => __('eav::attribute.input_type'),
+'options' => get_attribute_input_type_options(),
+'default' => 'text',
+'disabled' => object_get($item, 'exists')
 ])
 
 <div class="form-group" id="groupOptionValue" style="display: none;">
-    <label for="name" class="font-weight-600">
-        {{ __('eav::attribute.manager_option_value.label') }}
-    </label>
-    <div class="manager-option-value table-responsive">
-        <table class="table" id="tableManagerOptionValue">
-            <thead>
-            <tr>
-                <td width="30"></td>
-                <td width="100">{{ __('eav::attribute.manager_option_value.is_default') }}</td>
-                <td>{{ __('eav::attribute.manager_option_value.value') }}</td>
-                <td>{{ __('eav::attribute.manager_option_value.image') }}</td>
-                <td width="100"></td>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach(object_get($item, 'options') ?? [] as $opt)
-                <tr>
-                    <td>
-                        <i class="fas fa-grip-vertical mouse-move"></i>
-                        <input type="hidden" name="options[{{ $opt->id }}][id]" value="{{ $opt->id }}">
-                    </td>
-                    <td>
-                        <div class="custom-radio text-center">
-                            <input type="radio" id="optionValue{{ $opt->id }}" name="options[{{ $opt->id }}][is_default]" value="1" {{ $opt->is_default ? 'checked' : '' }} class="custom-control-input">
-                            <label class="custom-control-label" for="optionValue{{ $opt->id }}"></label>
-                        </div>
-                    </td>
-                    <td>
-                        <input type="text" name="options[{{ $opt->id }}][value]" value="{{ $opt->value }}">
-                    </td>
-                    <td>
-                        @singleFile([
-                            'type' => 'image',
-                            'item' => $opt,
-                            'name' => "options[$opt->id][image]",
-                            'fieldGetData' => "image",
-                            'label' => '',
-                            'value' => $opt->image,
-                            'type' => 'image',
-                            'id' => $opt->id,
-                            'idHolder' => 'optIdHolder_'.$opt->id,
-                            'files' => 'holderFiles_'.$opt->id
-                        ])
-                    </td>
-                    <td>
-                        <a href="#" class="delete btn btn-danger">
-                            {{ __('core::button.delete') }}
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+  <label for="name" class="font-weight-600">
+    {{ __('eav::attribute.manager_option_value.label') }}
+  </label>
+  <div class="manager-option-value table-responsive">
+    <table class="table" id="tableManagerOptionValue">
+      <thead>
+        <tr>
+          <td width="30"></td>
+          <td width="100">{{ __('eav::attribute.manager_option_value.is_default') }}</td>
+          <td>{{ __('eav::attribute.manager_option_value.title') }}</td>
+          <td>{{ __('eav::attribute.manager_option_value.value') }}</td>
+          <td>{{ __('eav::attribute.manager_option_value.color') }}</td>
+          <td>{{ __('eav::attribute.manager_option_value.image') }}</td>
+          <td width="100"></td>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach(object_get($item, 'options') ?? [] as $opt)
+        <tr>
+          <td>
+            <i class="fas fa-grip-vertical mouse-move"></i>
+            <input type="hidden" name="options[{{ $opt->id }}][id]" value="{{ $opt->id }}">
+          </td>
+          <td>
+            <div class="custom-radio text-center">
+              <input type="radio" id="optionValue{{ $opt->id }}" name="options[{{ $opt->id }}][is_default]" value="1" {{ $opt->is_default ? 'checked' : '' }} class="custom-control-input">
+              <label class="custom-control-label" for="optionValue{{ $opt->id }}"></label>
+            </div>
+          </td>
+          <td>
+            <input type="text" name="options[{{ $opt->id }}][title]" value="{{ $opt->title }}">
+          </td>
+          <td>
+            <input type="text" name="options[{{ $opt->id }}][value]" value="{{ $opt->value }}">
+          </td>
+          <td>
+            <input type="color" name="options[{{ $opt->id }}][color]" value="{{ $opt->color }}">
+          </td>
+          <td>
+            @singleFile([
+            'type' => 'image',
+            'item' => $opt,
+            'name' => "options[$opt->id][image]",
+            'fieldGetData' => "image",
+            'label' => '',
+            'value' => $opt->image,
+            'type' => 'image',
+            'id' => $opt->id,
+            'idHolder' => 'optIdHolder_'.$opt->id,
+            'files' => 'holderFiles_'.$opt->id
+            ])
+          </td>
+          <td>
+            <a href="#" class="delete btn btn-error-soft btn-sm mr-1" style="background-color: rgb(255 71 71); color: white; width: 32px; height: 32px;border-color: red; border: 1px solid">
+              <i class="fa fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        @endforeach
 
-            @if(count(object_get($item, 'options') ?? []) == 0)
-                <tr>
-                    <td>
-                        <i class="fas fa-grip-vertical mouse-move"></i>
-                    </td>
-                    <td>
-                        <div class="custom-radio text-center">
-                            <input type="radio" id="option_1" name="options[option_1][is_default]" value="1" class="custom-control-input">
-                            <label class="custom-control-label" for="option_1"></label>
-                        </div>
-                    </td>
-                    <td>
-                        <input type="text" name="options[option_1][value]">
-                    </td>
-                    <td>
-                        @singleFile(['name' => "options[option_1][image]", 'label' => '', 'type' => 'image', 'id' => 'option_1', 'idHolder' => 'opop1Image', 'files' => 'files2'])
-                    </td>
-                    <td>
-                        <a href="#" class="delete btn btn-danger">
-                            {{ __('core::button.delete') }}
-                        </a>
-                    </td>
-                </tr>
-            @endif
-            </tbody>
-        </table>
+        @if(count(object_get($item, 'options') ?? []) == 0)
+        <tr>
+          <td>
+            <i class="fas fa-grip-vertical mouse-move"></i>
+          </td>
+          <td>
+            <div class="custom-radio text-center">
+              <input type="radio" id="option_1" name="options[option_1][is_default]" value="1" class="custom-control-input">
+              <label class="custom-control-label" for="option_1"></label>
+            </div>
+          </td>
+          <td>
+            <input type="text" name="options[option_1][title]">
+          </td>
+          <td>
+            <input type="text" name="options[option_1][value]">
+          </td>
+          <td>
+            <input type="color" name="options[option_1][color]">
+          </td>
+          <td>
+            @singleFile(['name' => "options[option_1][image]", 'label' => '', 'type' => 'image', 'id' => 'option_1', 'idHolder' => 'opop1Image', 'files' => 'files2'])
+          </td>
+          <td>
+            <a href="#" class="delete btn btn-danger">
+              {{ __('core::button.delete') }}
+            </a>
+          </td>
+        </tr>
+        @endif
+      </tbody>
+    </table>
 
-        <a href="#" id="btnAddOptionValue" class="btn btn-outline-dark">
-            {{ __('eav::attribute.manager_option_value.add_option') }}
-        </a>
-        <a href="#" id="btnClearDefault" class="btn btn-outline-danger">
-            {{ __('eav::attribute.manager_option_value.clear_default') }}
-        </a>
-    </div>
+    <a href="#" id="btnAddOptionValue" class="btn btn-outline-dark">
+      {{ __('eav::attribute.manager_option_value.add_option') }}
+    </a>
+    <a href="#" id="btnClearDefault" class="btn btn-outline-danger">
+      {{ __('eav::attribute.manager_option_value.clear_default') }}
+    </a>
+  </div>
 </div>
 
 <script type="text/html" id="optionValueRowTemplate">
-    <tr>
-        <td>
-            <i class="fas fa-grip-vertical mouse-move"></i>
-        </td>
-        <td>
-            <div class="custom-radio text-center">
-                <input type="radio" id="__OPTION_ID__" name="options[__OPTION_ID__][is_default]" value="1" class="custom-control-input">
-                <label class="custom-control-label" for="__OPTION_ID__"></label>
-            </div>
-        </td>
-        <td>
-            <input type="text" name="options[__OPTION_ID__][value]">
-        </td>
-        <td>
-            @singleFile(['name' => "options[__OPTION_ID__][image]", 'label' => '', 'type' => 'image', 'id' => '__OPTION_ID__', 'idHolder' => 'opReplaceImage__OPTION_ID__', 'files' => 'files2'])
-        </td>
-        <td>
-            <a href="#" class="delete btn btn-danger">
-                {{ __('core::button.delete') }}
-            </a>
-        </td>
-    </tr>
+  <tr>
+    <td>
+      <i class="fas fa-grip-vertical mouse-move"></i>
+    </td>
+    <td>
+      <div class="custom-radio text-center">
+        <input type="radio" id="__OPTION_ID__" name="options[__OPTION_ID__][is_default]" value="1" class="custom-control-input">
+        <label class="custom-control-label" for="__OPTION_ID__"></label>
+      </div>
+    </td>
+    <td>
+      <input type="text" name="options[__OPTION_ID__][title]">
+    </td>
+    <td>
+      <input type="text" name="options[__OPTION_ID__][value]">
+    </td>
+    <td>
+      <input type="color" value="#030303" name="options[__OPTION_ID__][color]">
+    </td>
+    <td>
+      @singleFile(['name' => "options[__OPTION_ID__][image]", 'label' => '', 'type' => 'image', 'id' => '__OPTION_ID__', 'idHolder' => 'opReplaceImage__OPTION_ID__', 'files' => 'files2'])
+    </td>
+    <td>
+      <a href="#" class="delete btn btn-danger">
+        {{ __('core::button.delete') }}
+      </a>
+    </td>
+  </tr>
 </script>
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('vendor/eav/admin/css/attribute.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/eav/v1/admin/css/attribute.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('vendor/eav/admin/js/attribute.js') }}"></script>
+<script src="{{ asset('vendor/eav/v1/admin/js/attribute.js') }}"></script>
 @endpush

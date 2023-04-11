@@ -67,7 +67,6 @@ abstract class AttributeController extends Controller
     MenuAdmin::activeMenu($this->getAdminMenuId());
     $item = $this->attributeRepository->find($id);
     session()->put('session_id', Str::random(20));
-    // dd($item->options()->get());
     $version = get_version_actived();
     return view("eav::$version.admin.attribute.edit")->with([
       'item'            => $item,

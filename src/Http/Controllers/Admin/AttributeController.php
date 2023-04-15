@@ -93,7 +93,7 @@ abstract class AttributeController extends Controller
   {
     $this->attributeRepository->delete($id);
 
-    if ($request->wantsJson()) {
+    if ($request->ajax()) {
       Session::flash('success', __('eav::attribute.notification.deleted'));
       return response()->json([
         'success' => true,

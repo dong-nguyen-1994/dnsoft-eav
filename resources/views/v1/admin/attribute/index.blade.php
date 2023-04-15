@@ -6,7 +6,7 @@
 
 @section('page_subtitle', __('eav::attribute.index.page_subtitle'))
 
-@section('content-header')
+@section('breadcrumbs')
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -75,7 +75,7 @@
                                     @endadmincan
 
                                     @admincan($routeNamePrefix.'destroy')
-                                    <button-delete url-delete="{{ route($routeNamePrefix.'destroy', $item->id) }}"></button-delete>
+                                    <x-button-delete-v1 url="{{ route($routeNamePrefix.'destroy', $item->id) }}"></x-button-delete-v1>
                                     @endadmincan
                                 </td>
                             </tr>

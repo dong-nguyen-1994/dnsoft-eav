@@ -148,9 +148,9 @@
 </script>
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('vendor/eav/v1/admin/css/attribute.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/eav/admin/css/attribute.css') }}">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('vendor/eav/v1/admin/js/attribute.js') }}"></script>
+<script src="{{ asset('vendor/eav/admin/js/attribute.js') }}"></script>
 @endpush

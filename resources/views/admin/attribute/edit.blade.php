@@ -1,4 +1,4 @@
-@extends('core::v1.admin.master')
+@extends('core::admin.master')
 
 @section('meta_title', __('eav::attribute.edit.page_title'))
 
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @include('eav::v1.admin.attribute._fields', ['item' => $item])
+                @include('eav::admin.attribute._fields', ['item' => $item])
             </div>
             <div class="card-footer text-right">
                 <div class="btn-group">

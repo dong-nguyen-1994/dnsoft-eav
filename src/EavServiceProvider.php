@@ -57,14 +57,10 @@ class EavServiceProvider extends ServiceProvider
     $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'eav');
 
     $this->publishes([
-      __DIR__ . '/../public/v1' => public_path('vendor/eav/v1'),
-    ], 'dnsoft-eav-v1');
+      __DIR__ . '/../public' => public_path('vendor/eav'),
+    ], 'dnsoft-eav');
 
-    $this->publishes([
-      __DIR__ . '/../public/v2' => public_path('vendor/eav/v2'),
-    ], 'dnsoft-eav-v2');
-
-    Blade::include('eav::v2.admin.form.attributes', 'attributes');
+    Blade::include('eav::admin.form.attributes', 'attributes');
 
     require_once __DIR__ . '/../helpers/helpers.php';
 

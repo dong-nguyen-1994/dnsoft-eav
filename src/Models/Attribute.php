@@ -72,8 +72,8 @@ class Attribute extends \Rinvex\Attributes\Models\Attribute
 
   public function getAdminFormAttribute(): string
   {
-    $version = get_version_actived();
-    return "eav::$version.admin.attribute-form." . $this->input_type;
+    
+    return "eav::admin.attribute-form." . $this->input_type;
   }
 
   public function setOptionsAttribute($options)

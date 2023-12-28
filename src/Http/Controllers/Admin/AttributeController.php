@@ -29,8 +29,8 @@ abstract class AttributeController extends Controller
   public function index()
   {
     $items = $this->attributeRepository->paginate($this->getEntityType(), 20);
-    $version = get_version_actived();
-    return view("eav::$version.admin.attribute.index", [
+    
+    return view("eav::admin.attribute.index", [
       'items'           => $items,
       'routeNamePrefix' => $this->getNamePrefixRoute(),
     ]);
@@ -40,8 +40,8 @@ abstract class AttributeController extends Controller
   {
     MenuAdmin::activeMenu($this->getAdminMenuId());
     session()->put('session_id', Str::random(20));
-    $version = get_version_actived();
-    return view("eav::$version.admin.attribute.create")->with([
+    
+    return view("eav::admin.attribute.create")->with([
       'routeNamePrefix' => $this->getNamePrefixRoute(),
       'item' => null
     ]);
@@ -67,8 +67,8 @@ abstract class AttributeController extends Controller
     MenuAdmin::activeMenu($this->getAdminMenuId());
     $item = $this->attributeRepository->find($id);
     session()->put('session_id', Str::random(20));
-    $version = get_version_actived();
-    return view("eav::$version.admin.attribute.edit")->with([
+    
+    return view("eav::admin.attribute.edit")->with([
       'item'            => $item,
       'routeNamePrefix' => $this->getNamePrefixRoute(),
     ]);
